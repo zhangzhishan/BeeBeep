@@ -1,22 +1,22 @@
 extern crate clap;
 extern crate dotenv;
 
-use clap::{Arg, App};
-use teloxide::prelude::*;
+use clap::{App, Arg};
 use std::process::{Command, Stdio};
 use std::str;
-
+use teloxide::prelude::*;
 
 #[tokio::main]
 async fn main() {
-
     let matches = App::new("beep")
-                        .arg(Arg::with_name("command")
-                             .short("c")
-                             .long("command")
-                             .takes_value(true)
-                             .multiple(true))
-                        .get_matches();
+        .arg(
+            Arg::with_name("command")
+                .short("c")
+                .long("command")
+                .takes_value(true)
+                .multiple(true),
+        )
+        .get_matches();
 
     let default_command = dotenv::var("DEFAULT_COMMAND").unwrap_or_else(|_| "".to_string());
     let command = matches.value_of("command").unwrap_or(&default_command);
@@ -29,12 +29,15 @@ async fn run(command: &str) {
     log::info!("start beebeep");
 
     let cmd = Command::new("cmd")
-                         .args(&["/C", command])
-                         .stdout(Stdio::inherit())
-                         .stderr(Stdio::inherit())
-                         .spawn()
-                         .unwrap();
-    let command_error = cmd.wait_with_output().expect("failed to read stdout").stdout;
+        .args(&["/C", command])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .spawn()
+        .unwrap();
+    let command_error = cmd
+        .wait_with_output()
+        .expect("failed to read stdout")
+        .stdout;
 
     let token = dotenv::var("TOKEN").expect("No token");
     let bot = Bot::new(token);
