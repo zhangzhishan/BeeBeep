@@ -7,9 +7,10 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-teloxide = "0.2.0"
+teloxide = "0.5.0"
 log = "0.4.8"
-tokio = "0.2.11"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 pretty_env_logger = "0.4.0"
 clap = "~2.27.0"
 dotenv = "0.15.0"
+notifica = "3.0"
