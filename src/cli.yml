@@ -1,0 +1,12 @@
+name: beebeep
+version: "1.0"
+author: Zhishan Zhang <zhangzhishanlo@gmail.com>
+args:
+  - command:
+      short: c
+      long: command
+      takes_value: true
+  - telegram:
+      short: t
+  - debug:
+      short: d
