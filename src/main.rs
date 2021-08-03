@@ -1,11 +1,11 @@
 extern crate clap;
 extern crate dotenv;
 
-use clap::{App, load_yaml};
+use clap::{load_yaml, App};
+use std::env;
 use std::process::{Command, Stdio};
 use std::str;
 use teloxide::prelude::*;
-use std::env;
 
 #[tokio::main]
 async fn main() {
@@ -45,19 +45,19 @@ fn run(command: &str) -> String {
 
     let cmd = if cfg!(target_os = "windows") {
         Command::new("cmd")
-                .args(&["/C", command])
-                .stdout(Stdio::inherit())
-                .stderr(Stdio::inherit())
-                .spawn()
-                .unwrap()
+            .args(&["/C", command])
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .unwrap()
     } else {
         Command::new("sh")
-                .arg("-c")
-                .arg(command)
-                .stdout(Stdio::inherit())
-                .stderr(Stdio::inherit())
-                .spawn()
-                .unwrap()
+            .arg("-c")
+            .arg(command)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .unwrap()
     };
 
     let command_error = cmd
