@@ -1,10 +1,12 @@
 [package]
 name = "beebeep"
-version = "0.1.0"
-authors = ["zhizha"]
+version = "0.1.1"
+authors = ["Zhishan Zhang <zhangzhishanlo@gmail.com>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "MIT"
+keywords = ["notification", "commnad", "shell"]
+categories = ["command-line-utilities"]
+description = "BeeBeep is a very very easy tool to notify me after some command finished."
 
 [dependencies]
 teloxide = "0.5.0"
